@@ -17,7 +17,7 @@
 main:							# start of main
 .LFB0:
 	.cfi_startproc		
-	endbr64						# Terminate Indirect Branch in 64 bit
+	endbr64						
 	pushq	%rbp				# Save address of previous stack frame
 	.cfi_def_cfa_offset 16
 	.cfi_offset 6, -16
@@ -77,7 +77,7 @@ length:							# length starts
 .LFB1:
 	.cfi_startproc				# Call Frame Information
 	endbr64						# Terminate Indirect Branch in 64 bit
-	pushq	%rbp				# Save old base pointer
+	pushq	%rbp				# Save old base pointer by pushing it into the current stack
 	.cfi_def_cfa_offset 16
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp			# rbp <-- rsp, Set new stack pointer
@@ -108,108 +108,108 @@ sort:                           # sort starts
 .LFB2:                          
 	.cfi_startproc              # Call Frame Information
 	endbr64                     # Terminate Indirect Branch in 64 bit
-	pushq	%rbp                # Save address of previous stack frame   
+	pushq	%rbp                # Save address of previous base pointer by pushing it into the stack   
 	.cfi_def_cfa_offset 16
 	.cfi_offset 6, -16
-	movq	%rsp, %rbp          
+	movq	%rsp, %rbp          # rbp <-- rsp, move base pointer to current stack pointer's position           
 	.cfi_def_cfa_register 6
-	subq	$48, %rsp           # Create space for local array and variables
-	movq	%rdi, -24(%rbp)
-	movl	%esi, -28(%rbp)
-	movq	%rdx, -40(%rbp)
-	movl	$0, -8(%rbp)
-	jmp	.L9
+	subq	$48, %rsp           # rsp <-- (rsp - 48), Create space for local array and variables
+	movq	%rdi, -24(%rbp)     # M[rbp-24] <-- rdi, stores the 1st argument (str) in (rbp-24)   
+	movl	%esi, -28(%rbp)     # M[rbp-28] <-- esi, stores the 2nd argument (len) in (rbp-28)
+	movq	%rdx, -40(%rbp)     # M[rbp-40] <-- rdx, stores the 3rd argument (dest) in (rbp-40)
+	movl	$0, -8(%rbp)        # M[rbp-8] <-- 0, here M[rbp-8] = i
+	jmp	.L9                     # jump to .L9
 .L13:
-	movl	$0, -4(%rbp)
-	jmp	.L10
+	movl	$0, -4(%rbp)        # M[rbp-4] <-- 0, intialize j = 0
+	jmp	.L10                    # jump to .L10
 .L12:
-	movl	-8(%rbp), %eax
-	movslq	%eax, %rdx
-	movq	-24(%rbp), %rax
-	addq	%rdx, %rax
-	movzbl	(%rax), %edx
-	movl	-4(%rbp), %eax
-	movslq	%eax, %rcx
-	movq	-24(%rbp), %rax
-	addq	%rcx, %rax
-	movzbl	(%rax), %eax
-	cmpb	%al, %dl
-	jge	.L11
-	movl	-8(%rbp), %eax
-	movslq	%eax, %rdx
-	movq	-24(%rbp), %rax
-	addq	%rdx, %rax
-	movzbl	(%rax), %eax
-	movb	%al, -9(%rbp)
-	movl	-4(%rbp), %eax
-	movslq	%eax, %rdx
-	movq	-24(%rbp), %rax
-	addq	%rdx, %rax
-	movl	-8(%rbp), %edx
-	movslq	%edx, %rcx
-	movq	-24(%rbp), %rdx
-	addq	%rcx, %rdx
-	movzbl	(%rax), %eax
-	movb	%al, (%rdx)
-	movl	-4(%rbp), %eax
-	movslq	%eax, %rdx
-	movq	-24(%rbp), %rax
-	addq	%rax, %rdx
-	movzbl	-9(%rbp), %eax
-	movb	%al, (%rdx)
+	movl	-8(%rbp), %eax      # eax <-- M[rbp-8], i.e. assign eax = i
+	movslq	%eax, %rdx          # rdx <-- (sign-extended double word to quad word) i
+	movq	-24(%rbp), %rax     # rax <-- str
+	addq	%rdx, %rax          # rax <-- str + i
+	movzbl	(%rax), %edx        # edx <-- (Long) str[i]
+	movl	-4(%rbp), %eax      # eax <-- j
+	movslq	%eax, %rcx          # rcx <-- (quad word) j
+	movq	-24(%rbp), %rax     # rax <-- str 
+	addq	%rcx, %rax          # rax <-- str + j
+	movzbl	(%rax), %eax        # eax <-- (Long) str[j]
+	cmpb	%al, %dl            # compare al(str[j]) and dl(str[i])
+	jge	.L11                    # if( str[i] >= str[j] ) jump to .L11  else we go below and swap str[i] with str[j]
+	movl	-8(%rbp), %eax      # eax <-- i
+	movslq	%eax, %rdx          # rdx <-- (quad word) i
+	movq	-24(%rbp), %rax     # rax <-- str
+	addq	%rdx, %rax          # rax <-- str + i 
+	movzbl	(%rax), %eax        # eax <-- (Long) str[i]
+	movb	%al, -9(%rbp)       # M[rbp-9] <-- str[i]
+	movl	-4(%rbp), %eax      # eax <-- j
+	movslq	%eax, %rdx          # rdx <-- (quad word) j
+	movq	-24(%rbp), %rax     # rax <-- str
+	addq	%rdx, %rax          # rax <-- str + j
+	movl	-8(%rbp), %edx      # edx <-- i
+	movslq	%edx, %rcx          # rcx <-- (quad word) i
+	movq	-24(%rbp), %rdx     # rdx <-- str
+	addq	%rcx, %rdx          # rdx <-- str + i
+	movzbl	(%rax), %eax        # eax <-- (Long) str[j]
+	movb	%al, (%rdx)         # str[i] <-- str[j] 
+	movl	-4(%rbp), %eax      # eax <-- j
+	movslq	%eax, %rdx          # rdx <-- (quad word) j
+	movq	-24(%rbp), %rax     # rax <-- str
+	addq	%rax, %rdx          # rdx <-- str + j
+	movzbl	-9(%rbp), %eax      # eax <-- (Long) str[i]; since, M[rbp-9] = str[i]
+	movb	%al, (%rdx)         # str[j] <-- str[i]
 .L11:
-	addl	$1, -4(%rbp)
+	addl	$1, -4(%rbp)        # j = j + 1
 .L10:
-	movl	-4(%rbp), %eax
-	cmpl	-28(%rbp), %eax
-	jl	.L12
-	addl	$1, -8(%rbp)
+	movl	-4(%rbp), %eax      # eax <-- j
+	cmpl	-28(%rbp), %eax     # compare M[rbp-28] (len) and eax (j)
+	jl	.L12                    # if j < len jump to .L12
+	addl	$1, -8(%rbp)        # i = i + 1
 .L9:
-	movl	-8(%rbp), %eax
-	cmpl	-28(%rbp), %eax
-	jl	.L13
-	movq	-40(%rbp), %rdx
-	movl	-28(%rbp), %ecx
-	movq	-24(%rbp), %rax
-	movl	%ecx, %esi
-	movq	%rax, %rdi
-	call	reverse
-	nop
-	leave
+	movl	-8(%rbp), %eax      # eax <-- i, here i = M[rbp-8]
+	cmpl	-28(%rbp), %eax     # compare M[rbp-28] (len) and eax (i)
+	jl	.L13                    # if i < len  jump to .L13
+	movq	-40(%rbp), %rdx     # rdx <-- dest, 3rd argument for reverse function
+	movl	-28(%rbp), %ecx     # ecx <-- len
+	movq	-24(%rbp), %rax     # rax <-- str
+	movl	%ecx, %esi          # esi <-- len, 2nd argument for reverse function
+	movq	%rax, %rdi          # rdi <-- str, 1sr argument for reverse function
+	call	reverse             # call reverse(str, len, dest)
+	nop                         # performs no operation
+	leave                       # 
 	.cfi_def_cfa 7, 8
-	ret
+	ret                         # return
 	.cfi_endproc
 .LFE2:
 	.size	sort, .-sort
-	.globl	reverse
-	.type	reverse, @function
-reverse:
+	.globl	reverse             # reverse is a global name
+	.type	reverse, @function  # reverse is a function
+reverse:                        # reverse function starts
 .LFB3:
-	.cfi_startproc
-	endbr64
-	pushq	%rbp
+	.cfi_startproc              # Call Frame Information
+	endbr64                     # Terminate Indirect Branch in 64 bit
+	pushq	%rbp                # save old base pointer by pushing it into the stack
 	.cfi_def_cfa_offset 16
 	.cfi_offset 6, -16
-	movq	%rsp, %rbp
+	movq	%rsp, %rbp          # rbp <-- rsp, move base pointer to current stack pointer's position
 	.cfi_def_cfa_register 6
-	movq	%rdi, -24(%rbp)
-	movl	%esi, -28(%rbp)
-	movq	%rdx, -40(%rbp)
-	movl	$0, -8(%rbp)
-	jmp	.L15
+	movq	%rdi, -24(%rbp)     # M[rbp-24] <-- str ( str is present in rdi, 1st function argument )
+	movl	%esi, -28(%rbp)     # M[rbp-28] <-- len ( len is present in esi, 2nd function argument )
+	movq	%rdx, -40(%rbp)     # M[rbp-40] <-- dest ( dest is present in rdx, 3rd function argument)
+	movl	$0, -8(%rbp)        # M[rbp-8] <-- 0 or i <-- 0; here M[rbp-8] represents i
+	jmp	.L15                    # jump to .L15
 .L20:
-	movl	-28(%rbp), %eax
-	subl	-8(%rbp), %eax
-	subl	$1, %eax
-	movl	%eax, -4(%rbp)
-	nop
-	movl	-28(%rbp), %eax
-	movl	%eax, %edx
-	shrl	$31, %edx
-	addl	%edx, %eax
-	sarl	%eax
-	cmpl	%eax, -4(%rbp)
-	jl	.L18
+	movl	-28(%rbp), %eax     # eax <-- len
+	subl	-8(%rbp), %eax      # eax <-- eax - i; hence, eax = len-i
+	subl	$1, %eax            # eax <-- eax - 1; hence, eax = len-i-1
+	movl	%eax, -4(%rbp)      # j <-- len-i-1; here M[rbp-4] represents j
+	nop                         # performs no operation
+	movl	-28(%rbp), %eax     # eax <-- len
+	movl	%eax, %edx          # edx <-- len
+	shrl	$31, %edx           # edx <-- (edx >> 31); hence, edx = (len >> 31), in our case (len >> 31) is always 0 because len is never negative
+	addl	%edx, %eax          # eax <-- eax + edx; hence eax = len + (len >> 31); adding (len >> 31) to len helps incase len is negative
+	sarl	%eax                # eax <-- (eax >> 1); hence eax = eax/2 = (len + (len >> 31))/2
+	cmpl	%eax, -4(%rbp)      # compare (len + (len >> 31))/2 with  j 
+	jl	.L18                    # if j < (len + (len >> 31))/2 jump to .L18
 	movl	-8(%rbp), %eax
 	cmpl	-4(%rbp), %eax
 	je	.L23

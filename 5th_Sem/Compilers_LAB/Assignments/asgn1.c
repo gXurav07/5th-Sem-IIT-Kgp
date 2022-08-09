@@ -31,22 +31,22 @@ return i;
 }
 void sort(char str[20], int len, char dest[20])
 {
-int i, j;
-char temp;
-for(i=0; i<len; i++)
-{
-for(j=0; j<len; j++)
-{
-if(str[i]<str[j]) //sorting in ascending order
-{
-temp = str[i];
-str[i] = str[j];
-str[j] = temp;
-}
-}
-}
-//calling reverse to sort the array in descending order
-reverse(str,len,dest);
+    int i, j;
+    char temp;
+    for(i=0; i<len; i++)
+    {
+        for(j=0; j<len; j++)
+        {
+            if(str[i]<str[j]) //sorting in ascending order
+            {
+                temp = str[i];
+                str[i] = str[j];
+                str[j] = temp;
+            }
+        }
+    }
+    //calling reverse to sort the array in descending order
+    reverse(str,len,dest);
 }
 void reverse(char str[20], int len, char dest[20])
 {
