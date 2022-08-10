@@ -2,14 +2,14 @@
 	.text					
 	.section	.rodata		# read-only data section 
 	.align 8				# align with 8-byte boundary
-.LC0:						# Label for below string
+.LC0:						# Label for first printf
 	.string	"Enter the string (all lowrer case): "	# Prompt to get input
 .LC1:
 	.string	"%s"
-.LC2:										# Label for below string
+.LC2:										# Label for 2nd printf
 	.string	"Length of the string: %d\n"	# Text to print before result
 	.align 8
-.LC3:
+.LC3:												# Label for 3rd printf
 	.string	"The string in descending order: %s\n"	# Text to print before result
 	.text						# Code starts
 	.globl	main				# main is a global name
