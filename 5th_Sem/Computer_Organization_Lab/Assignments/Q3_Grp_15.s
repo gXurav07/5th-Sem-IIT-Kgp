@@ -1,3 +1,4 @@
+# This program takes an integer >=10 as input and prints whether that niteger is PRIME or COMPOSITE 
     .globl main
     .data
 
@@ -11,11 +12,21 @@ result2:
     .asciiz "Entered number is a COMPOSITE number."
 
     .text
+# main program
+#
+# program variables
+#   a:   $s0    (used as constant with value 10) 
+#   n:   $s1    (input integer)
+#   i:   $t0    (loop variable)
+#   sq:  $t1    (helper variable used to calculate floor(sqrt(n))
+#   x:   $t3    (helper varibale)
+#   rem: $t4    (helper variable which stores n%i) 
+#
 main:
     li $s0, 10      # helper integer 
 
 input: 
-    li $v0, 4       # issue prompt to get a positive integer
+    li $v0, 4       # issue prompt to get a positive integer n
     la $a0, prompt
     syscall
 
@@ -23,7 +34,7 @@ input:
     syscall
     move $s1, $v0
 
-    bge $s1, $s0, algo      # moving to the solution if the number is >= 10
+    bge $s1, $s0, algo      # moving to the solution if the number n is >= 10
 
     li $v0, 4       # issue warning on getting a number less than 10
     la $a0, warning
@@ -31,25 +42,24 @@ input:
     j input         # jump back to the input
 
 algo:
-    li $t0, 2       # loop variable 
-    li $0, 0       # helper integer 
-    li $t1, 1       
+    li $t0, 2       # loop variable i
+    li $t1, 1       # variable sq
 
 while:
-    mul $t3, $t1, $t1
-    bgt $t3, $s1, endWhile
-    addi $t1, $t1, 1
-    b while
+    mul $t3, $t1, $t1   # x = sq*sq
+    bgt $t3, $s1, endWhile  # if x>n goto endWhile
+    addi $t1, $t1, 1        # sq = sq + 1
+    b while                 # continue loop
 
 endWhile:
-    add $t1, $t1, -1			# 
+    add $t1, $t1, -1			# sq = sq - 1 ( becaule currently sq is > floor(sqrt(n))
 
 while1:
-    bgt $t0, $t1, prime         # move to prime section if loop variable becomes gretaer than sq the input
-    div $s1, $t0                
-    mfhi $t3                    # storing the remainder in $t3
-    beq $t3, $0, composite      # if remainder is zero then composite
-    addi $t0, $t0, 1            # incrementing the loop variable
+    bgt $t0, $t1, prime         # if i>sq move to prime section 
+    div $s1, $t0                # divide n by i and store the remainder in hi
+    mfhi $t4                    # rem <-- n%i
+    beq $t4, $0, composite      # if rem==0 then goto composite 
+    addi $t0, $t0, 1            # else incrementing the loop variable
     b while1                    # continue loop
 
 composite: 

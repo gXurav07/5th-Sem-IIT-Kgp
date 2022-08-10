@@ -237,40 +237,40 @@ reverse:                        # reverse function starts
 	movb	%al, (%rdx)			# str[j] <-- temp; here M[str+j] is written as str[j]
 	jmp	.L18					# jump to .L18
 .L23:
-	nop						# performs no operation
+	nop							# performs no operation
 .L18:
-	addl	$1, -8(%rbp)	# i = i + 1
+	addl	$1, -8(%rbp)		# i = i + 1
 .L15:
-	movl	-28(%rbp), %eax # eax <-- len
-	movl	%eax, %edx		# edx <-- len
-	shrl	$31, %edx		# edx <-- (edx >> 31); hence, edx = (len >> 31), in our case (len >> 31) is always 0 because len is never negative
-	addl	%edx, %eax		# eax <-- len + (len >> 31) = len + 0 = len
-	sarl	%eax			# eax <-- (eax >> 1); hence eax = eax/2 = len/2
-	cmpl	%eax, -8(%rbp)	# compare len/2 with  j 
-	jl	.L20				# if j < len/2 jump to .L20			
-	movl	$0, -8(%rbp)	# i <-- 0
-	jmp	.L21				# jump to .L21
+	movl	-28(%rbp), %eax 	# eax <-- len
+	movl	%eax, %edx			# edx <-- len
+	shrl	$31, %edx			# edx <-- (edx >> 31); hence, edx = (len >> 31), in our case (len >> 31) is always 0 because len is never negative
+	addl	%edx, %eax			# eax <-- len + (len >> 31) = len + 0 = len
+	sarl	%eax				# eax <-- (eax >> 1); hence eax = eax/2 = len/2
+	cmpl	%eax, -8(%rbp)		# compare len/2 with  j 
+	jl	.L20					# if j < len/2 jump to .L20			
+	movl	$0, -8(%rbp)		# i <-- 0
+	jmp	.L21						# jump to .L21
 .L22:
-	movl	-8(%rbp), %eax	# eax <-- i
-	movslq	%eax, %rdx		# rdx <-- (quad word) i
-	movq	-24(%rbp), %rax	# rax <-- str
-	addq	%rdx, %rax		# rax <-- str + i
-	movl	-8(%rbp), %edx	# edx <-- i
-	movslq	%edx, %rcx		# rcx <-- (quad word) i
-	movq	-40(%rbp), %rdx	# rdx <-- dest
-	addq	%rcx, %rdx		# rdx <-- dest + i
-	movzbl	(%rax), %eax	# eax <-- (long) str[i]
-	movb	%al, (%rdx)		# dest[i] <-- str[i]
-	addl	$1, -8(%rbp)	# i = i + 1
+	movl	-8(%rbp), %eax		# eax <-- i
+	movslq	%eax, %rdx			# rdx <-- (quad word) i
+	movq	-24(%rbp), %rax		# rax <-- str
+	addq	%rdx, %rax			# rax <-- str + i
+	movl	-8(%rbp), %edx		# edx <-- i
+	movslq	%edx, %rcx			# rcx <-- (quad word) i
+	movq	-40(%rbp), %rdx		# rdx <-- dest
+	addq	%rcx, %rdx			# rdx <-- dest + i
+	movzbl	(%rax), %eax		# eax <-- (long) str[i]
+	movb	%al, (%rdx)			# dest[i] <-- str[i]
+	addl	$1, -8(%rbp)		# i = i + 1
 .L21:
-	movl	-8(%rbp), %eax	# eax <-- i
-	cmpl	-28(%rbp), %eax	# compare len with i
-	jl	.L22				# if i<len jump to .L22
-	nop						# performs no operation
-	nop						# performs no operation
-	popq	%rbp			# pop top of stack into rbp; This restores the previous base pointer saves in line 190
+	movl	-8(%rbp), %eax		# eax <-- i
+	cmpl	-28(%rbp), %eax		# compare len with i
+	jl	.L22					# if i<len jump to .L22
+	nop							# performs no operation
+	nop							# performs no operation
+	popq	%rbp				# pop top of stack into rbp; This restores the previous base pointer saves in line 190
 	.cfi_def_cfa 7, 8
-	ret						# return
+	ret							# return
 	.cfi_endproc
 .LFE3:
 	.size	reverse, .-reverse
