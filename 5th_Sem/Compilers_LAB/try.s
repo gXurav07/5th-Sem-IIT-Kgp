@@ -18,43 +18,43 @@ main:							# start of main
 .LFB0:
 	.cfi_startproc		
 	endbr64						
-	pushq	%rbp				# Save address of previous stack frame
+	pushq	%rbp				# Save old base pointer by pushing it into the stack
 	.cfi_def_cfa_offset 16
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp			# rbp <-- rsp set new stack base pointer 		
 	.cfi_def_cfa_register 6
-	subq	$80, %rsp			# Create space for local array and variables
+	subq	$80, %rsp			# Create space for local array and variables by moving stack pointer
 	movq	%fs:40, %rax  		# Access value of %fs:40 and store it in %rax 
-	movq	%rax, -8(%rbp)		# M[rbp-8] <-- rax
-	xorl	%eax, %eax			# equivalent to eax = eax XOR eax = 0
-	leaq	.LC0(%rip), %rax	# load the .LC0 string in rax
-	movq	%rax, %rdi			# rdi <-- rax
+	movq	%rax, -8(%rbp)		# M[rbp-8] <-- %fs:40, used to check for corruption
+	xorl	%eax, %eax			# equivalent to: eax = (eax XOR eax) = 0
+	leaq	.LC0(%rip), %rax	# load the .LC0 string in rax; rip helps in relative addressing
+	movq	%rax, %rdi			# rdi <-- rax, (1st argument for printf)
 	movl	$0, %eax			# eax <-- 0
-	call	printf@PLT			# call printf, return value is in eax
+	call	printf@PLT			# call printf
 	leaq	-64(%rbp), %rax		# rax <-- (rbp - 64)
-	movq	%rax, %rsi			# rsi <-- rax, moves length(str) into rsi which acts as second argument of sort 
+	movq	%rax, %rsi			# rsi <-- (rbp - 64), 2nd argument for scanf
 	leaq	.LC1(%rip), %rax	# load the .LC1 string in rax
-	movq	%rax, %rdi			# rdi <-- rax, rdi is first argument for scanf
+	movq	%rax, %rdi			# rdi <-- rax, 1st argument for scanf
 	movl	$0, %eax			# eax <-- 0
-	call	__isoc99_scanf@PLT	# call scanf
+	call	__isoc99_scanf@PLT	# calls scanf, reads input string str and stores it at (rbp -64)
 	leaq	-64(%rbp), %rax		# rax <-- (rbp - 64), loads input string (str)  into rax 
-	movq	%rax, %rdi			# rdi <-- rax ,move input string (str)  to rdi
+	movq	%rax, %rdi			# rdi <-- rax ,move input string (str)  to rdi ( 1st argument for length function)
 	call	length				# call length(str)
-	movl	%eax, -68(%rbp)		# M[rbp-68] <-- eax
-	movl	-68(%rbp), %eax		# eax <-- M[rbp-68]
-	movl	%eax, %esi			# esi <-- eax
-	leaq	.LC2(%rip), %rax	# load the .LC2 string in rax for printing
-	movq	%rax, %rdi			# rdi <-- rax, rdi is first argument of below printf
+	movl	%eax, -68(%rbp)		# M[rbp-68] <-- eax; here eax contains return value form length(str); M[rbp-68] refers to len 
+	movl	-68(%rbp), %eax		# eax <-- len
+	movl	%eax, %esi			# esi <-- len, (2nd argument for printf)
+	leaq	.LC2(%rip), %rax	# load the .LC2 string in rax 
+	movq	%rax, %rdi			# rdi <-- .LC2, (1st argument for printf)
 	movl	$0, %eax			# eax <-- 0
 	call	printf@PLT			# call printf 
-	leaq	-32(%rbp), %rdx		# rdx <-- (rbp - 32), moves dest array to rdx (3rd argument of sort)
-	movl	-68(%rbp), %ecx		# ecx <-- M[rbp - 68]
-	leaq	-64(%rbp), %rax		# rax <-- (rbp - 64)
-	movl	%ecx, %esi			# esi <-- ecx
+	leaq	-32(%rbp), %rdx		# rdx <-- (rbp - 32); (rbp-32) refers to dest array; this command moves dest array to rdx (3rd argument for sort)
+	movl	-68(%rbp), %ecx		# ecx <-- len
+	leaq	-64(%rbp), %rax		# rax <-- str
+	movl	%ecx, %esi			# esi <-- len, (2nd argument for sort)
 	movq	%rax, %rdi			# moves str to rdi which acts as argument for sort function
 	call	sort				# calls sort(str, length, dest)
-	leaq	-32(%rbp), %rax		# rax <-- (rbp - 32), loads address of dest in rax
-	movq	%rax, %rsi			# rsi <-- rax, moves address of dest to rsi for printing		
+	leaq	-32(%rbp), %rax		# rax <-- dest, loads address of dest in rax
+	movq	%rax, %rsi			# rsi <-- dest, moves address of dest to rsi for printing		
 	leaq	.LC3(%rip), %rax	# loads the string .LC3 into rax
 	movq	%rax, %rdi			# moves addess of .LC3 to rdi, which will act as 1st argument of printf
 	movl	$0, %eax			# eax <-- 0
@@ -65,7 +65,7 @@ main:							# start of main
 	je	.L3						# if no corruption jump to .L3
 	call	__stack_chk_fail@PLT # else call Stack fail
 .L3:
-	leave
+	leave						# deallocates all the local space and restoes previous base pointer by popping it from stack into rbp				
 	.cfi_def_cfa 7, 8
 	ret							# return
 	.cfi_endproc
@@ -82,23 +82,23 @@ length:							# length starts
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp			# rbp <-- rsp, Set new stack pointer
 	.cfi_def_cfa_register 6
-	movq	%rdi, -24(%rbp)		# M[rbp-24] <-- rdi
-	movl	$0, -4(%rbp)		# M[rbp-4] <-- 0
-	jmp	.L5						# jump to .L5
+	movq	%rdi, -24(%rbp)		# M[rbp-24] <-- str ( str is present in rdi, 1st function argument )
+	movl	$0, -4(%rbp)		# i <-- 0; Here, M[rbp-4] refers to i
+	jmp	.L5						# jump to .L5 where we find the length of str using a for loop
 .L6:
-	addl	$1, -4(%rbp)		# M[rbp-4] <-- M[rbp-4] + 1
-.L5:
-	movl	-4(%rbp), %eax		# eax <-- M[rbp - 4]
-	movslq	%eax, %rdx			# 
-	movq	-24(%rbp), %rax		# rax <-- M[rbp-24]
-	addq	%rdx, %rax			# rax <-- rax + rdx
-	movzbl	(%rax), %eax		# eax <-- (byte to long)rax
-	testb	%al, %al
-	jne	.L6
-	movl	-4(%rbp), %eax
+	addl	$1, -4(%rbp)		# i = i + 1
+.L5:							# for(i=0; str[i]!='\0'; i++)
+	movl	-4(%rbp), %eax		# eax <-- i
+	movslq	%eax, %rdx			# rdx <--(QUADWORD) i
+	movq	-24(%rbp), %rax		# rax <-- str
+	addq	%rdx, %rax			# rax <-- str + i
+	movzbl	(%rax), %eax		# eax <-- (LONG) str[i]
+	testb	%al, %al			# tests whether str[i] is '\0'
+	jne	.L6						# if str[i] != '\0' jump to .L6 
+	movl	-4(%rbp), %eax		# else eax <-- i; we assign i to rax register, which is used to return something from a function
 	popq	%rbp				# pop top of stack into rbp; This restores the previous base pointer saves in line 80
 	.cfi_def_cfa 7, 8
-	ret
+	ret							# return
 	.cfi_endproc
 .LFE1:
 	.size	length, .-length
@@ -124,38 +124,38 @@ sort:                           # sort starts
 	jmp	.L10                    # jump to .L10
 .L12:
 	movl	-8(%rbp), %eax      # eax <-- M[rbp-8], i.e. assign eax = i
-	movslq	%eax, %rdx          # rdx <-- (sign-extended double word to quad word) i
+	movslq	%eax, %rdx          # rdx <-- (sign-extended double word to QUADWORD) i
 	movq	-24(%rbp), %rax     # rax <-- str
 	addq	%rdx, %rax          # rax <-- str + i
-	movzbl	(%rax), %edx        # edx <-- (long) str[i]
+	movzbl	(%rax), %edx        # edx <-- (LONG) str[i]
 	movl	-4(%rbp), %eax      # eax <-- j
-	movslq	%eax, %rcx          # rcx <-- (quad word) j
+	movslq	%eax, %rcx          # rcx <-- (QUADWORD) j
 	movq	-24(%rbp), %rax     # rax <-- str 
 	addq	%rcx, %rax          # rax <-- str + j
-	movzbl	(%rax), %eax        # eax <-- (long) str[j]
+	movzbl	(%rax), %eax        # eax <-- (LONG) str[j]
 	cmpb	%al, %dl            # compare al(str[j]) and dl(str[i])
 	jge	.L11                    # if( str[i] >= str[j] ) jump to .L11  else we go below and swap str[i] with str[j]
 	movl	-8(%rbp), %eax      # eax <-- i
-	movslq	%eax, %rdx          # rdx <-- (quad word) i
+	movslq	%eax, %rdx          # rdx <-- (QUADWORD) i
 	movq	-24(%rbp), %rax     # rax <-- str
 	addq	%rdx, %rax          # rax <-- str + i 
-	movzbl	(%rax), %eax        # eax <-- (long) str[i]
+	movzbl	(%rax), %eax        # eax <-- (LONG) str[i]
 	movb	%al, -9(%rbp)       # M[rbp-9] <-- str[i]
 	movl	-4(%rbp), %eax      # eax <-- j
-	movslq	%eax, %rdx          # rdx <-- (quad word) j
+	movslq	%eax, %rdx          # rdx <-- (QUADWORD) j
 	movq	-24(%rbp), %rax     # rax <-- str
 	addq	%rdx, %rax          # rax <-- str + j
 	movl	-8(%rbp), %edx      # edx <-- i
-	movslq	%edx, %rcx          # rcx <-- (quad word) i
+	movslq	%edx, %rcx          # rcx <-- (QUADWORD) i
 	movq	-24(%rbp), %rdx     # rdx <-- str
 	addq	%rcx, %rdx          # rdx <-- str + i
-	movzbl	(%rax), %eax        # eax <-- (long) str[j]
+	movzbl	(%rax), %eax        # eax <-- (LONG) str[j]
 	movb	%al, (%rdx)         # str[i] <-- str[j] 
 	movl	-4(%rbp), %eax      # eax <-- j
-	movslq	%eax, %rdx          # rdx <-- (quad word) j
+	movslq	%eax, %rdx          # rdx <-- (QUADWORD) j
 	movq	-24(%rbp), %rax     # rax <-- str
 	addq	%rax, %rdx          # rdx <-- str + j
-	movzbl	-9(%rbp), %eax      # eax <-- (long) str[i]; since, M[rbp-9] = str[i]
+	movzbl	-9(%rbp), %eax      # eax <-- (LONG) str[i]; since, M[rbp-9] = str[i]
 	movb	%al, (%rdx)         # str[j] <-- str[i]
 .L11:
 	addl	$1, -4(%rbp)        # j = j + 1
@@ -214,23 +214,23 @@ reverse:                        # reverse function starts
 	cmpl	-4(%rbp), %eax		# compare j with i
 	je	.L23					# if i == j jump to .L23
 	movl	-8(%rbp), %eax		# else eax <-- i
-	movslq	%eax, %rdx			# rdx <-- (quad word) i
+	movslq	%eax, %rdx			# rdx <-- (QUADWORD) i
 	movq	-24(%rbp), %rax		# rax <-- str
 	addq	%rdx, %rax			# rax <-- str + i
-	movzbl	(%rax), %eax		# eax <-- (long) str[i]
+	movzbl	(%rax), %eax		# eax <-- (LONG) str[i]
 	movb	%al, -9(%rbp)		# temp <-- str[i], Here M[rbp-9] refers to variable temp
 	movl	-4(%rbp), %eax		# eax <-- j
-	movslq	%eax, %rdx			# rdx <-- (quad word) j
+	movslq	%eax, %rdx			# rdx <-- (QUADWORD) j
 	movq	-24(%rbp), %rax		# rax <-- str
 	addq	%rdx, %rax			# rax <-- str + j
 	movl	-8(%rbp), %edx		# edx <-- i
-	movslq	%edx, %rcx			# rcx <-- (quad word) i
+	movslq	%edx, %rcx			# rcx <-- (QUADWORD) i
 	movq	-24(%rbp), %rdx		# rdx <-- str
 	addq	%rcx, %rdx			# rdx <-- str + i
-	movzbl	(%rax), %eax		# eax <-- (long) str[j]
+	movzbl	(%rax), %eax		# eax <-- (LONG) str[j]
 	movb	%al, (%rdx)			# str[i] <-- str[j]
 	movl	-4(%rbp), %eax		# eax <-- j
-	movslq	%eax, %rdx			# rdx <-- (quad word) j
+	movslq	%eax, %rdx			# rdx <-- (QUADWORD) j
 	movq	-24(%rbp), %rax		# rax <-- str
 	addq	%rax, %rdx			# rdx <-- str + j
 	movzbl	-9(%rbp), %eax		# eax <-- temp
@@ -252,14 +252,14 @@ reverse:                        # reverse function starts
 	jmp	.L21						# jump to .L21
 .L22:
 	movl	-8(%rbp), %eax		# eax <-- i
-	movslq	%eax, %rdx			# rdx <-- (quad word) i
+	movslq	%eax, %rdx			# rdx <-- (QUADWORD) i
 	movq	-24(%rbp), %rax		# rax <-- str
 	addq	%rdx, %rax			# rax <-- str + i
 	movl	-8(%rbp), %edx		# edx <-- i
-	movslq	%edx, %rcx			# rcx <-- (quad word) i
+	movslq	%edx, %rcx			# rcx <-- (QUADWORD) i
 	movq	-40(%rbp), %rdx		# rdx <-- dest
 	addq	%rcx, %rdx			# rdx <-- dest + i
-	movzbl	(%rax), %eax		# eax <-- (long) str[i]
+	movzbl	(%rax), %eax		# eax <-- (LONG) str[i]
 	movb	%al, (%rdx)			# dest[i] <-- str[i]
 	addl	$1, -8(%rbp)		# i = i + 1
 .L21:

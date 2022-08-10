@@ -27,7 +27,7 @@ newline:
 #   rem:    $s4  (stores x%i) 
 #   sq:     $s5 (used to find floor(sqrt(x))
 #   a:      $s6 (stores sq*sq) 
-#   max_sq: $s7 (helps to avoid overflow in x incase of big input for x) 
+#   max_sq: $s7 (helps to avoid overflow in sq*sq incase of big input for x) 
 
 
 main:
@@ -43,13 +43,13 @@ input:
     syscall 
     move $s1,$v0    # x <-- $v0
 
-    bgt $s1, $0, find_square_root  # if x>0 goto find_square_root  
+    bgt $s1, $0, find_square_root  # if x>0 goto 'find_square_root'  
 
 wrong_input:
     li $v0,4		# issue warning on getting non-positive number
     la $a0, warning
     syscall	
-    j input         # jump to input
+    j input         # jump to 'input'
 
 find_square_root:
     li $s7, 46340   # floor of square root of max 32 bit signed integer 
@@ -58,9 +58,9 @@ find_square_root:
     mflo $s6        # moves the value of special register lo to $s6, a <-- sq*sq
 
 for1:               # for( sq=1; sq*sq<=x; ++sq)   
-    bgt $s6, $s1, endfor1   # if a>x goto endfor1
+    bgt $s6, $s1, endfor1   # if a>x goto 'endfor1'
     addi $s5, $s5, 1        # sq = sq + 1
-    bgt $s5, $s7, endfor1  # if sq > max_sq goto endwhile
+    bgt $s5, $s7, endfor1  # if sq > max_sq goto 'endfor1'
     mult $s5, $s5           
     mflo $s6                # a = sq*sq
     b for1	                # continue loop
@@ -75,7 +75,7 @@ check_perfect:
     li $s3, 2       # i = 2
 
 for2:
-    bge $s3, $s5, endfor2   # if(i>sq) goto endfor2
+    bge $s3, $s5, endfor2   # if(i>=sq) goto 'endfor2'
     div $s1, $s3    # divide x by i and store remainder in hi
 
     mfhi $s4        # gets the remainder from special register hi, rem = hi
@@ -96,8 +96,8 @@ endfor2:
     bne $s4,$0 result # if remainder is not zero jump to 'result'
 
     add $s2, $s2, $s5   # sum = sum + sq
-    mflo $s7            # $s7 <-- n/sq
-    beq $s5, $s7, result    # if sq == sqrt(x) jump to 'result'
+    mflo $s7            # $s7 <-- floor(n/sq)
+    beq $s5, $s7, result    # if sq == floor(n/sq) jump to 'result'
     add $s2, $s2, $s7   # else sum = sum + n/sq
 
 result:
