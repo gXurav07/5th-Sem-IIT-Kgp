@@ -27,7 +27,7 @@ newline:
 #   rem:    $s4  (stores x%i) 
 #   sq:     $s5 (used to find floor(sqrt(x))
 #   a:      $s6 (stores sq*sq) 
-#   max_sq: $s7 (helps to avoid overflow in a incase of big input for x) 
+#   max_sq: $s7 (helps to avoid overflow in sq*sq incase of big input for x) 
 
 
 main:
