@@ -1,0 +1,4 @@
+1) We can use normal integers with beq, bge, etc. commands
+   Ex: beq $t0, 12, endwhile
+2) Access array elements as ArrayName($t0)
+   where $t0 contains the position*(size of array type)
