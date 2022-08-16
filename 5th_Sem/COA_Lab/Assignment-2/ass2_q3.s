@@ -91,9 +91,10 @@ pushToStack:
         sub     $sp, $sp, 4
         jr      $ra	
 mallocInStack:
-        move    $v0, $sp
         mul     $t0, $a0, 4
         sub     $sp, $sp, $t0
+        move    $v0, $sp
+        addi    $v0, 4          # address $sp is not a part of 4*$a0 sized 
         jr      $ra
 
 
