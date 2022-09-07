@@ -1,0 +1,3 @@
+verilog work "full_addr.v"
+verilog work "rca_8bits.v"
+verilog work "rca_8bits_TestBench.v"

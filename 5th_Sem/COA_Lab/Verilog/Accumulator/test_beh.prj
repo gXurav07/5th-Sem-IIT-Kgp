@@ -1,0 +1,7 @@
+verilog work "../../Assignment-3(Verilog)/Verilog Demo/ISE Project/Accumulator/half_addr.v"
+verilog work "../../Assignment-3(Verilog)/Verilog Demo/ISE Project/Accumulator/full_addr.v"
+verilog work "../../Assignment-3(Verilog)/Verilog Demo/ISE Project/Accumulator/dff.v"
+verilog work "../../Assignment-3(Verilog)/Verilog Demo/ISE Project/Accumulator/adder_struct.v"
+verilog work "../../Assignment-3(Verilog)/Verilog Demo/ISE Project/Accumulator/accumulator.v"
+verilog work "../../Assignment-3(Verilog)/Verilog Demo/ISE Project/Accumulator/test.v"
+verilog work "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v"

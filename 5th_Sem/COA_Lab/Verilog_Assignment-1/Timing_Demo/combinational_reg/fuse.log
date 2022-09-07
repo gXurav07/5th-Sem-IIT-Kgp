@@ -1,0 +1,28 @@
+Running: /opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/fuse -intstyle ise -incremental -lib unisims_ver -lib unimacro_ver -lib xilinxcorelib_ver -lib secureip -o /home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/Timing_Demo/combinational_reg/test_isim_beh.exe -prj /home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/Timing_Demo/combinational_reg/test_beh.prj work.test work.glbl 
+ISim P.20131013 (signature 0xfbc00daa)
+Number of CPUs detected in this system: 12
+Turning on mult-threading, number of parallel sub-compilation jobs: 24 
+Determining compilation order of HDL files
+Analyzing Verilog file "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/Timing_Demo/combinational_reg/half_addr.v" into library work
+Analyzing Verilog file "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/Timing_Demo/combinational_reg/full_addr.v" into library work
+Analyzing Verilog file "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/Timing_Demo/combinational_reg/adder_struct.v" into library work
+Analyzing Verilog file "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/Timing_Demo/combinational_reg/wrapper.v" into library work
+Analyzing Verilog file "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/Timing_Demo/combinational_reg/test.v" into library work
+Analyzing Verilog file "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v" into library work
+Starting static elaboration
+Completed static elaboration
+Fuse Memory Usage: 82684 KB
+Fuse CPU Usage: 320 ms
+Compiling module half_addr
+Compiling module full_addr
+Compiling module adder_struct
+Compiling module wrapper
+Compiling module test
+Compiling module glbl
+Time Resolution for simulation is 1ps.
+Waiting for 1 sub-compilation(s) to finish...
+Compiled 6 Verilog Units
+Built simulation executable /home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/Timing_Demo/combinational_reg/test_isim_beh.exe
+Fuse Memory Usage: 1691464 KB
+Fuse CPU Usage: 330 ms
+GCC CPU Usage: 230 ms

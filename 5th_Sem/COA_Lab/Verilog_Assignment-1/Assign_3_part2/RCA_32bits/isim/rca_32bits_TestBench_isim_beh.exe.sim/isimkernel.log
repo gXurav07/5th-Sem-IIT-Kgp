@@ -1,0 +1,29 @@
+Command line:
+   rca_32bits_TestBench_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  49223
+
+Fri Aug 26 10:23:07 2022
+
+
+ Elaboration Time: 0.03 sec
+
+ Current Memory Usage: 193.806 Meg
+
+ Total Signals          : 337
+ Total Nets             : 238
+ Total Signal Drivers   : 168
+ Total Blocks           : 41
+ Total Primitive Blocks : 33
+ Total Processes        : 170
+ Total Traceable Variables  : 21
+ Total Scalar Nets and Variables : 383
+Total Line Count : 26
+
+ Total Simulation Time: 0.08 sec
+
+ Current Memory Usage: 269.308 Meg
+
+Fri Aug 26 10:27:17 2022
+

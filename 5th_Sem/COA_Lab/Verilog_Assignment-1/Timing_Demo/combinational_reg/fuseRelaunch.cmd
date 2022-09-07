@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/Timing_Demo/combinational_reg/test_isim_beh.exe" -prj "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/Timing_Demo/combinational_reg/test_beh.prj" "work.test" "work.glbl" 

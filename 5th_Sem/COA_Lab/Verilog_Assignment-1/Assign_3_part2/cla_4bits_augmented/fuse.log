@@ -1,0 +1,24 @@
+Running: /opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/fuse -intstyle ise -incremental -lib unisims_ver -lib unimacro_ver -lib xilinxcorelib_ver -lib secureip -o /home/prakhar4660/temp/cla_4bits_augmented/cla_4bits_augmented_TestBench_isim_beh.exe -prj /home/prakhar4660/temp/cla_4bits_augmented/cla_4bits_augmented_TestBench_beh.prj cla_4bits_augmented_TestBench work.glbl 
+ISim P.20131013 (signature 0xfbc00daa)
+Number of CPUs detected in this system: 6
+Turning on mult-threading, number of parallel sub-compilation jobs: 12 
+Determining compilation order of HDL files
+Analyzing Verilog file "/home/prakhar4660/temp/cla_4bits_augmented/cla_4bits_augmented.v" into library work
+Analyzing Verilog file "/home/prakhar4660/temp/cla_4bits_augmented/wrapper.v" into library work
+Analyzing Verilog file "/home/prakhar4660/temp/cla_4bits_augmented/cla_4bits_augmented_TestBench.v" into library work
+Analyzing Verilog file "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v" into library work
+Starting static elaboration
+Completed static elaboration
+Fuse Memory Usage: 82936 KB
+Fuse CPU Usage: 830 ms
+Compiling module cla_4bits_augmented
+Compiling module wrapper
+Compiling module cla_4bits_augmented_TestBench
+Compiling module glbl
+Time Resolution for simulation is 1ps.
+Waiting for 1 sub-compilation(s) to finish...
+Compiled 4 Verilog Units
+Built simulation executable /home/prakhar4660/temp/cla_4bits_augmented/cla_4bits_augmented_TestBench_isim_beh.exe
+Fuse Memory Usage: 905576 KB
+Fuse CPU Usage: 870 ms
+GCC CPU Usage: 790 ms

@@ -1,0 +1,28 @@
+Running: /opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/fuse -intstyle ise -incremental -lib unisims_ver -lib unimacro_ver -lib xilinxcorelib_ver -lib secureip -o /home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/RCA_16bits/rca_16bits_TestBench_isim_beh.exe -prj /home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/RCA_16bits/rca_16bits_TestBench_beh.prj work.rca_16bits_TestBench work.glbl 
+ISim P.20131013 (signature 0xfbc00daa)
+Number of CPUs detected in this system: 12
+Turning on mult-threading, number of parallel sub-compilation jobs: 24 
+Determining compilation order of HDL files
+Analyzing Verilog file "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/RCA_16bits/full_addr.v" into library work
+Analyzing Verilog file "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/RCA_16bits/rca_8bits.v" into library work
+Analyzing Verilog file "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/RCA_16bits/rca_16bits.v" into library work
+Analyzing Verilog file "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/RCA_16bits/wrapper.v" into library work
+Analyzing Verilog file "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/RCA_16bits/rca_16bits_TestBench.v" into library work
+Analyzing Verilog file "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v" into library work
+Starting static elaboration
+Completed static elaboration
+Fuse Memory Usage: 82692 KB
+Fuse CPU Usage: 560 ms
+Compiling module full_addr
+Compiling module rca_8bits
+Compiling module rca_16bits
+Compiling module wrapper
+Compiling module rca_16bits_TestBench
+Compiling module glbl
+Time Resolution for simulation is 1ps.
+Waiting for 1 sub-compilation(s) to finish...
+Compiled 6 Verilog Units
+Built simulation executable /home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/RCA_16bits/rca_16bits_TestBench_isim_beh.exe
+Fuse Memory Usage: 1691488 KB
+Fuse CPU Usage: 580 ms
+GCC CPU Usage: 360 ms

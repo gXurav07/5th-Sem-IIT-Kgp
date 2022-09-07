@@ -1,0 +1,7 @@
+xst -intstyle ise -ifn "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/RCA_64bits/rca_64bits.xst" -ofn "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/RCA_64bits/rca_64bits.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc7a100t-csg324-1 rca_64bits.ngc rca_64bits.ngd  
+map -intstyle ise -p xc7a100t-csg324-1 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -mt off -ir off -pr off -lc off -power off -o rca_64bits_map.ncd rca_64bits.ngd rca_64bits.pcf 
+map -intstyle ise -p xc7a100t-csg324-1 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -mt off -ir off -pr off -lc off -power off -o rca_64bits_map.ncd rca_64bits.ngd rca_64bits.pcf 
+map -intstyle ise -p xc7a100t-csg324-1 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -mt off -ir off -pr off -lc off -power off -o rca_64bits_map.ncd rca_64bits.ngd rca_64bits.pcf 
+map -intstyle ise -p xc7a100t-csg324-1 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -mt off -ir off -pr off -lc off -power off -o rca_64bits_map.ncd rca_64bits.ngd rca_64bits.pcf 
+map -intstyle ise -p xc7a100t-csg324-1 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -mt off -ir off -pr off -lc off -power off -o rca_64bits_map.ncd rca_64bits.ngd rca_64bits.pcf 

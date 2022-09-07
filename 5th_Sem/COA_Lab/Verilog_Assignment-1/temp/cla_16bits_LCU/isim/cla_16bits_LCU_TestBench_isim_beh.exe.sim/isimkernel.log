@@ -1,0 +1,29 @@
+Command line:
+   cla_16bits_LCU_TestBench_isim_beh.exe
+     -simmode  gui
+     -simrunnum  1
+     -socket  44945
+
+Wed Aug 31 12:18:44 2022
+
+
+ Elaboration Time: 0.02 sec
+
+ Current Memory Usage: 193.405 Meg
+
+ Total Signals          : 70
+ Total Nets             : 124
+ Total Signal Drivers   : 50
+ Total Blocks           : 8
+ Total Primitive Blocks : 6
+ Total Processes        : 52
+ Total Traceable Variables  : 21
+ Total Scalar Nets and Variables : 237
+Total Line Count : 70
+
+ Total Simulation Time: 0.04 sec
+
+ Current Memory Usage: 268.906 Meg
+
+Wed Aug 31 12:19:11 2022
+

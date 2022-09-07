@@ -1,0 +1,4 @@
+verilog work "cla_4bits.v"
+verilog work "cla_16bits_Ripple.v"
+verilog work "cla_16bits_Ripple_TestBench.v"
+verilog work "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v"

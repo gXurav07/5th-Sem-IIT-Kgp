@@ -1,0 +1,22 @@
+ISim log file
+Running: /home/prakhar4660/temp/cla_4bits_augmented/cla_4bits_augmented_TestBench_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb /home/prakhar4660/temp/cla_4bits_augmented/cla_4bits_augmented_TestBench_isim_beh.wdb 
+ISim P.20131013 (signature 0xfbc00daa)
+WARNING: A WEBPACK license was found.
+WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
+WARNING: ISim will run in Lite mode. Please refer to the ISim documentation for more information on the differences between the Lite and the Full version.
+This is a Lite version of ISim.
+Time resolution is 1 ps
+# onerror resume
+# wave add /
+# run 1000 ns
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+in1 =  0, in2 =  0, c_in = 0, sum =  x, p = x, g = x
+in1 =  0, in2 =  0, c_in = 0, sum =  0, p = 0, g = 0
+in1 =  3, in2 =  6, c_in = 1, sum =  0, p = 0, g = 0
+in1 =  3, in2 =  6, c_in = 1, sum = 10, p = 0, g = 0
+in1 =  3, in2 = 10, c_in = 0, sum = 10, p = 0, g = 0
+in1 =  3, in2 = 10, c_in = 0, sum = 13, p = 0, g = 0
+in1 = 12, in2 =  2, c_in = 0, sum = 13, p = 0, g = 0
+in1 = 12, in2 =  2, c_in = 0, sum = 14, p = 0, g = 0
+# exit 0

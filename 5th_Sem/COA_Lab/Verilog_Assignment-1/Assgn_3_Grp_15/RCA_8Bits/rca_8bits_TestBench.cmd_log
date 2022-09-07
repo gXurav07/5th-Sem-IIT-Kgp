@@ -1,0 +1,3 @@
+xst -intstyle ise -ifn "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/Assgn_3_Grp_15/RCA_8Bits/rca_8bits_TestBench.xst" -ofn "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/Assgn_3_Grp_15/RCA_8Bits/rca_8bits_TestBench.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc7a100t-csg324-1 rca_8bits_TestBench.ngc rca_8bits_TestBench.ngd  
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc7a100t-csg324-1 rca_8bits_TestBench.ngc rca_8bits_TestBench.ngd  

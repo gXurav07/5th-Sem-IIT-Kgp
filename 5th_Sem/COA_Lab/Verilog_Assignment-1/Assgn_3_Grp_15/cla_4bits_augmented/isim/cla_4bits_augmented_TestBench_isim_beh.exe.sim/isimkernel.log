@@ -1,0 +1,29 @@
+Command line:
+   cla_4bits_augmented_TestBench_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  38161
+
+Wed Aug 31 16:09:16 2022
+
+
+ Elaboration Time: 0.07 sec
+
+ Current Memory Usage: 184.009 Meg
+
+ Total Signals          : 33
+ Total Nets             : 57
+ Total Signal Drivers   : 25
+ Total Blocks           : 4
+ Total Primitive Blocks : 2
+ Total Processes        : 30
+ Total Traceable Variables  : 29
+ Total Scalar Nets and Variables : 163
+Total Line Count : 58
+
+ Total Simulation Time: 0.09 sec
+
+ Current Memory Usage: 259.51 Meg
+
+Wed Aug 31 16:09:21 2022
+

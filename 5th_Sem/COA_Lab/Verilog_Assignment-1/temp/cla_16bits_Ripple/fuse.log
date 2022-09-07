@@ -1,0 +1,24 @@
+Running: /opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/fuse -intstyle ise -incremental -lib unisims_ver -lib unimacro_ver -lib xilinxcorelib_ver -lib secureip -o /home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/cla_16bits_Ripple/cla_16bits_Ripple_TestBench_isim_beh.exe -prj /home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/cla_16bits_Ripple/cla_16bits_Ripple_TestBench_beh.prj work.cla_16bits_Ripple_TestBench work.glbl 
+ISim P.20131013 (signature 0xfbc00daa)
+Number of CPUs detected in this system: 12
+Turning on mult-threading, number of parallel sub-compilation jobs: 24 
+Determining compilation order of HDL files
+Analyzing Verilog file "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/cla_16bits_Ripple/cla_4bits.v" into library work
+Analyzing Verilog file "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/cla_16bits_Ripple/cla_16bits_Ripple.v" into library work
+Analyzing Verilog file "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/cla_16bits_Ripple/cla_16bits_Ripple_TestBench.v" into library work
+Analyzing Verilog file "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v" into library work
+Starting static elaboration
+Completed static elaboration
+Fuse Memory Usage: 82696 KB
+Fuse CPU Usage: 330 ms
+Compiling module cla_4bits
+Compiling module cla_16bits_Ripple
+Compiling module cla_16bits_Ripple_TestBench
+Compiling module glbl
+Time Resolution for simulation is 1ps.
+Waiting for 1 sub-compilation(s) to finish...
+Compiled 4 Verilog Units
+Built simulation executable /home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/cla_16bits_Ripple/cla_16bits_Ripple_TestBench_isim_beh.exe
+Fuse Memory Usage: 1691784 KB
+Fuse CPU Usage: 340 ms
+GCC CPU Usage: 180 ms

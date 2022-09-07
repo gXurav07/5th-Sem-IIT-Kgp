@@ -1,0 +1,19 @@
+ISim log file
+Running: /home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/Assgn_3_Grp_15/RCA_8Bits/rca_8bits_TestBench_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb /home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/Assgn_3_Grp_15/RCA_8Bits/rca_8bits_TestBench_isim_beh.wdb 
+ISim P.20131013 (signature 0xfbc00daa)
+WARNING: A WEBPACK license was found.
+WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
+WARNING: ISim will run in Lite mode. Please refer to the ISim documentation for more information on the differences between the Lite and the Full version.
+This is a Lite version of ISim.
+Time resolution is 1 ps
+# onerror resume
+# wave add /
+# run 1000 ns
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+input1 =  17, input2 = 112, carry_in = 0, sum = 129, carry_out = 0
+input1 = 123, input2 =  42, carry_in = 1, sum = 166, carry_out = 0
+input1 = 143, input2 = 107, carry_in = 0, sum = 250, carry_out = 0
+input1 = 120, input2 = 110, carry_in = 1, sum = 231, carry_out = 0
+input1 = 255, input2 =   1, carry_in = 0, sum =   0, carry_out = 1
+# exit 0

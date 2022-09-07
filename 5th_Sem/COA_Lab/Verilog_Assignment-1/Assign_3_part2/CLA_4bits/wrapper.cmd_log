@@ -1,0 +1,3 @@
+xst -intstyle ise -ifn "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/CLA_4bits/wrapper.xst" -ofn "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/CLA_4bits/wrapper.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc7a100t-csg324-1 wrapper.ngc wrapper.ngd  
+map -intstyle ise -p xc7a100t-csg324-1 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -mt off -ir off -pr off -lc off -power off -o wrapper_map.ncd wrapper.ngd wrapper.pcf 

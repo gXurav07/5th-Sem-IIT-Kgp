@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/RCA_8bits/rca_8bits_TestBench_isim_beh.exe" -prj "/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/RCA_8bits/rca_8bits_TestBench_beh.prj" "work.rca_8bits_TestBench" "work.glbl" 

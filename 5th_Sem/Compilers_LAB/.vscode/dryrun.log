@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/gaurav/IIT_KGP_COURSES/5th_Sem/Compilers_LAB'
+make: Leaving directory '/home/gaurav/IIT_KGP_COURSES/5th_Sem/Compilers_LAB'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+
