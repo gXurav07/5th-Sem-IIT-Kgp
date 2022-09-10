@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2022-08-25T11:38:56</DateModified>
-  <ModuleName>accumulator</ModuleName>
+  <DateModified>2022-09-09T16:27:35</DateModified>
+  <ModuleName>multiplexer</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
-  <SavedFilePath>/home/gaurav/edd/iseconfig/multiplexer.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>/home/gaurav/edd/</ImplementationReportsDirectory>
+  <SavedFilePath>/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Verilog/edd/iseconfig/multiplexer.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Verilog/edd/</ImplementationReportsDirectory>
   <DateInitialized>2022-08-25T11:38:56</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

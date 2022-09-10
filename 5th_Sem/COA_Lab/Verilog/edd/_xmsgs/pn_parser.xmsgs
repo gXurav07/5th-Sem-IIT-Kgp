@@ -8,26 +8,5 @@
 <!-- Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.    -->
 
 <messages>
-<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3(Verilog)/Verilog Demo/ISE Project/Accumulator/accumulator.v&quot; into library work</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3(Verilog)/Verilog Demo/ISE Project/Accumulator/adder_struct.v&quot; into library work</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3(Verilog)/Verilog Demo/ISE Project/Accumulator/dff.v&quot; into library work</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3(Verilog)/Verilog Demo/ISE Project/Accumulator/full_addr.v&quot; into library work</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3(Verilog)/Verilog Demo/ISE Project/Accumulator/half_addr.v&quot; into library work</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3(Verilog)/Verilog Demo/ISE Project/Accumulator/test.v&quot; into library work</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;/home/gaurav/edd/multiplexer.v&quot; into library work</arg>
-</msg>
-
 </messages>
 

@@ -11,6 +11,10 @@
     #define MULTI_LINE_COMMENT      10
     #define INVALID_ENTRY           11
 %}
+
+%x MULTI_LINE_COMMENT_BODY
+%x SINGLE_LINE_COMMENT_BODY
+
 KEYWORD                             "auto"|"break"|"case"|"char"|"const"|"continue"|"default"|"do"|"double"|"else"|"enum"|"extern"|"float"|"for"|"goto"|"if"|"inline"|"int"|"long"|"register"|"restrict"|"return"|"short"|"signed"|"sizeof"|"static"|"struct"|"switch"|"typedef"|"union"|"unsigned"|"void"|"volatile"|"while"|"_Bool"|"_Complex"|"_Imaginary"
 
 IDENTIFIER                          {IDENTIFIER_NONDIGIT}[a-zA-Z0-9]* 
@@ -40,9 +44,8 @@ STRING_LITERAL                      \"{S_CHAR_SEQUENCE}?\"
 S_CHAR_SEQUENCE                     {S_CHAR}+
 S_CHAR                              [^\"\n\\]|{ESCAPE_SEQUENCE}
 
-PUNCTUATOR                          "["|"]"|"("|")"|"{"|"}"|"."|"-"|">"|"+"|"+"|"-"|"-"|"&"|"*"|"+"|"-"|"~"|"!"|"/"|"%"|"<"|"<"|">"|">"|"<"|">"|"<"|"="|">"|"="|"="|"="|"!"|"="|"^"|"|"|"&"|"&"|"|"|"|"|"?"|":"|";"|"."|"."|"."|"="|"*"|"="|"/"|"="|"%"|"="|"+"|"="|"-"|"="|"<"|"<"|"="|">"|">"|"="|"&"|"="|"^"|"="|"|"|"="|","|"#"
-SINGLE_LINE_COMMENT                 "//"[^\n]*
-MULTI_LINE_COMMENT                  "/*"[^"*\"]*"*/"
+PUNCTUATOR                          "["|"]"|"("|")"|"{"|"}"|"."|"->"|"++"|"--"|"&"|"*"|"+"|"-"|"~"|"!"|"/"|"%"|"<<"|">>"|"<"|">"|"<="|">="|"=="|"!="|"^"|"|"|"&&"|"||"|"?"|":"|";"|"..."|"="|"*="|"/="|"%="|"+="|"-="|"<<="|">>="|"&="|"^="|"|="|","|"#"
+
 
 
 %%
@@ -55,8 +58,15 @@ MULTI_LINE_COMMENT                  "/*"[^"*\"]*"*/"
 {CHARACTER_CONSTANT}                return CHARACTER_CONSTANT;
 {STRING_LITERAL}                    return STRING_LITERAL;
 {PUNCTUATOR}                        return PUNCTUATOR;
-{SINGLE_LINE_COMMENT}               return SINGLE_LINE_COMMENT;
-{MULTI_LINE_COMMENT}                return MULTI_LINE_COMMENT;
+"/*"                                { BEGIN(MULTI_LINE_COMMENT_BODY); }
+<MULTI_LINE_COMMENT_BODY>"*/"       { BEGIN(INITIAL); return MULTI_LINE_COMMENT; }
+<MULTI_LINE_COMMENT_BODY>.          { }
+<MULTI_LINE_COMMENT_BODY>"\n"       { }
+
+"//"                                { BEGIN(SINGLE_LINE_COMMENT_BODY); }
+<SINGLE_LINE_COMMENT_BODY>"\n"      { BEGIN(INITIAL); return SINGLE_LINE_COMMENT; }
+<SINGLE_LINE_COMMENT_BODY><<EOF>>   { BEGIN(INITIAL); return SINGLE_LINE_COMMENT; }
+<SINGLE_LINE_COMMENT_BODY>.         { }
 .                                   return INVALID_ENTRY;
 %%
 int yywrap(void)

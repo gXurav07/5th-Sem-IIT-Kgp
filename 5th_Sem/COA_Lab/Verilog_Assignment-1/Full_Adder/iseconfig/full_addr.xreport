@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2022-08-29T23:16:27</DateModified>
+  <DateModified>2022-09-09T16:11:13</DateModified>
   <ModuleName>full_addr</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
-  <SavedFilePath>/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/Full_Adder/iseconfig/full_addr.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/Full_Adder</ImplementationReportsDirectory>
+  <SavedFilePath>/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Verilog_Assignment-1/Full_Adder/iseconfig/full_addr.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Verilog_Assignment-1/Full_Adder/</ImplementationReportsDirectory>
   <DateInitialized>2022-08-29T23:16:27</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

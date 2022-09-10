@@ -1,3 +1,0 @@
-db_type: 32
-db_name: 323
-db_port: 232

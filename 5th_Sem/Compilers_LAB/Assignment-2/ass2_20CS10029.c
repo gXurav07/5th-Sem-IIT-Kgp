@@ -9,8 +9,8 @@ int printStr(char *buff){
         length++;
     }
     __asm__ __volatile__(           // Assembly code to print a buffing
-        "movl $1, %%eax \n\t"
-        "movq $1, %%rdi \n\t"
+        "movl $1, %%eax \n\t"       // eax <-- 1 ( system call for write)
+        "movq $1, %%rdi \n\t"   //  rdi <-- 1 ( stdout file represented by 1)
         "syscall \n\t"
         :
         :"S"(buff),"d"(length)
@@ -23,8 +23,8 @@ int readInt(int *n) {
     int length;
 
     __asm__ __volatile__ (
-        "movl $0, %%eax \n\t" 
-        "movq $0, %%rdi \n\t"
+        "movl $0, %%eax \n\t"   // eax <-- 0: system call for read
+        "movq $0, %%rdi \n\t"   // rdi <-- 0: std-in file
         "syscall \n\t"
         : "=a"(length)
         :"S"(input), "d"(MAX_LENGTH));

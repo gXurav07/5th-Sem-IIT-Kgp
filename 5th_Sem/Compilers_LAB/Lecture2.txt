@@ -1,2 +1,0 @@
-extension of file doesn't matters
-we can get length of a string by substracting some address

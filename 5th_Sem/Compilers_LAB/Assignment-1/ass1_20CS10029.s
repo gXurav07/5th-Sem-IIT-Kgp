@@ -150,21 +150,21 @@ sort:                           			# sort starts
 	movslq	%eax, %rdx          		# rdx <-- (sign-extended double word to QUADWORD) i
 	movq	-24(%rbp), %rax     		# rax <-- str
 	addq	%rdx, %rax          		# rax <-- str + i
-	movzbl	(%rax), %edx       		 # edx <-- (LONG) str[i]
+	movzbl	(%rax), %edx       		 # edx <-- (LONG) str[i]		***********************************
 	movl	-4(%rbp), %eax     		 # eax <-- j
-	movslq	%eax, %rcx          		# rcx <-- (QUADWORD) j
+	movslq	%eax, %rcx          		# rcx <-- (QUADWORD) j		***********************************
 	movq	-24(%rbp), %rax     		# rax <-- str 
 	addq	%rcx, %rax          		# rax <-- str + j
 	movzbl	(%rax), %eax        		# eax <-- (LONG) str[j]
-	cmpb	%al, %dl            		# compare al(str[j]) and dl(str[i])
+	cmpb	%al, %dl            		# compare al(str[j]) and dl(str[i])		***********************************
 	jge	.L11                   		 # if( str[i] >= str[j] ) jump to .L11  else we go below and swap str[i] with str[j]
 
 	# temp = str[i];
 	movl	-8(%rbp), %eax     		 # eax <-- i
-	movslq	%eax, %rdx          		# rdx <-- (QUADWORD) i
+	movslq	%eax, %rdx          		# rdx <-- (QUADWORD) i  	
 	movq	-24(%rbp), %rax    		 # rax <-- str
 	addq	%rdx, %rax         		 # rax <-- str + i 
-	movzbl	(%rax), %eax       		 # eax <-- (LONG) str[i]
+	movzbl	(%rax), %eax       		 # eax <-- (LONG) str[i]		
 	movb	%al, -9(%rbp)       		# temp <-- str[i], here M[rbp-9] refers to temp
 
 	# str[i] = str[j];
@@ -241,7 +241,7 @@ reverse:                        			# reverse function starts
 	nop                        			 # performs no operation
 	movl	-28(%rbp), %eax     		# eax <-- len
 	movl	%eax, %edx          		# edx <-- len
-	shrl	$31, %edx           		# edx <-- (edx >> 31); hence, edx = (len >> 31);
+	shrl	$31, %edx           		# edx <-- (edx >> 31); hence, edx = (len >> 31); ***********************************
 	# in our program (len >> 31) is always 0 because len is never negative
 	addl	%edx, %eax          		# eax <-- eax + edx; hence eax = len + (len >> 31) = len; 
 	# adding (len >> 31) to len helps incase len is negative

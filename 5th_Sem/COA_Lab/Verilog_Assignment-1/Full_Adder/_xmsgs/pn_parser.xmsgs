@@ -8,7 +8,7 @@
 <!-- Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.    -->
 
 <messages>
-<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Assignment-3/Full_Adder/full_addr.v&quot; into library work</arg>
+<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;/home/gaurav/IIT_KGP_COURSES/5th_Sem/COA_Lab/Verilog_Assignment-1/Full_Adder/full_addr.v&quot; into library work</arg>
 </msg>
 
 </messages>

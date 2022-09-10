@@ -1,3 +1,10 @@
+# MIPS Assignment-3
+# Question 3
+# Group 15
+# Group Members:
+# Gaurav Malakar - 20CS10029 
+# Prakhar Singh - 20CS10045
+
     .globl main
     .data
 prompt1:
